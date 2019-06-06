@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head">
 </head>
@@ -6,11 +6,11 @@
 
 <div th:replace="fragments :: page-header"></div>
 
-<div class="container body-content">
+<div class = "container body-content">
 
     <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
 
-    <form th:action="@{/search/results}">
+    <form th:action="@{/search/results}" method = "post">
         <h2>Search by:</h2>
 
         <p>
@@ -36,7 +36,16 @@
 
     <hr />
 
-    <!-- TODO #2 - Loop over jobs map to display all job fields -->
+
+    <div th:if="${jobs} and ${jobs.size()}">
+        <h4 th:text="|Number of job matches = ${jobs.size()}|"></h4>
+        <table>
+            <tr th:each="job, idx : ${jobs}" th:class="${idx.odd} ? 'odd'">
+                <td th:each="column : ${columns}" th:text="${job.get(column.key)}">
+                </td>
+            </tr>
+        </table>
+    </div>
 
 </div>
 
