@@ -37,17 +37,21 @@
     <hr />
 
 
-    <div th:if="${jobs} and ${jobs.size()}">
-        <h4 th:text="|Number of job matches = ${jobs.size()}|"></h4>
-        <table>
-            <tr th:each="job, idx : ${jobs}" th:class="${idx.odd} ? 'odd'">
-                <td th:each="column : ${columns}" th:text="${job.get(column.key)}">
-                </td>
+
+    <h2 th:unless="${isJobsEmpty}" th:text="|Result(s) ${jobSize}|"></h2>
+
+    <div>
+
+        <table th:each="jobListing: ${jobs}" class="job-listing">
+            <tr th:each=" job: ${jobListing}">
+                <td th:text="${job.key}"></td>
+                <td th:text="${job.value}"></td>
             </tr>
         </table>
     </div>
 
-</div>
 
+
+</div>
 </body>
 </html>

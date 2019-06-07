@@ -29,22 +29,26 @@ public class SearchController {
         // use findByCandV for searchterms other than all
         if (!searchType.equalsIgnoreCase("all")){
             ArrayList<HashMap<String, String>> jobs = JobData.findByColumnAndValue(searchType,searchTerm);
-            model.addAttribute("columns", ListController.columnChoices);
+            boolean isJobsEmpty = jobs.isEmpty();
+            int jobSize = jobs.size();
             model.addAttribute("title", "Jobs with " + searchType + ": " + searchTerm);
             model.addAttribute("jobs", jobs);
+            model.addAttribute("isJobsEmpty", isJobsEmpty);
+            model.addAttribute("jobSize", jobSize);
+            model.addAttribute("columns", ListController.columnChoices);
+
 
         }else{
             ArrayList<HashMap<String,String>> jobs = JobData.findByValue(searchTerm);
-            model.addAttribute("columns", ListController.columnChoices);
+            boolean isJobsEmpty = jobs.isEmpty();
+            int jobSize = jobs.size();
             model.addAttribute("title", "Jobs with " + searchType + ": " + searchTerm);
             model.addAttribute("jobs", jobs);
+            model.addAttribute("isJobsEmpty", isJobsEmpty);
+            model.addAttribute("jobSize", jobSize);
+            model.addAttribute("columns", ListController.columnChoices);
+
 
         }return "search";
-
-        /* This will be used for search by all
-
-        ArrayList<HashMap<String, String>> jobs = JobData.findByValue();
-
-         */
     }
 }

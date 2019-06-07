@@ -10,15 +10,15 @@
 
     <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
 
+    <h2 th:unless="${isJobsEmpty}" th:text="|Result(s) ${jobSize}|"></h2>
 
-    <h6 th:text="|Number of job matches = ${jobs.size()}|"></h6>
-        <table>
-            <tr th:each="job, idx : ${jobs}" th:class="${idx.odd} ? 'odd'">
-                <td th:each="column : ${columns}" th:text="${job.get(column.key)}">
-                </td>
+        <table th:each="jobss: ${jobs}" class="job-listing">
+            <tr th:each=" job: ${jobss}">
+                <td th:text="${job.key}"></td>
+                <td th:text="${job.value}"></td>
             </tr>
         </table>
-    </div>
+</div>
 
 
 </body>

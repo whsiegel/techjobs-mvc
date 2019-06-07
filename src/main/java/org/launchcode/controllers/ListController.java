@@ -58,9 +58,11 @@ public class ListController {
             @RequestParam String column, @RequestParam String value) {
 
         ArrayList<HashMap<String, String>> jobs = JobData.findByColumnAndValue(column, value);
+        boolean isJobsEmpty = jobs.isEmpty();
         model.addAttribute("title", "Jobs with " + columnChoices.get(column) + ": " + value);
         model.addAttribute("jobs", jobs);
         model.addAttribute("columns",columnChoices);
+        model.addAttribute("isJobsEmpty", isJobsEmpty);
         return "list-jobs";
     }
 }
